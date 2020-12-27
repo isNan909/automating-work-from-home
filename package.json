@@ -1,0 +1,13 @@
+{
+  "name": "Automation-WFH",
+  "version": "1.0.0",
+  "description": "Work from home automation",
+  "main": "index.js",
+  "repository": "https://github.com/ishan-me/automating-work-from-home",
+  "author": "Ishan",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "puppeteer": "^5.5.0"
+  }
+}
