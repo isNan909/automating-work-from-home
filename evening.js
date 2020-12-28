@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   vyagutaLeave(page);
 
-  // await browserLaunch.close();
+  await browserLaunch.close();
 })();
 
 function delay(time) {
@@ -51,15 +51,24 @@ const enterPassword = async (page) => {
   await page.keyboard.press('Enter');
 };
 
+Array.prototype.randomize = function () {
+  return this[Math.floor(Math.random() * this.length)];
+};
+
+task = [
+  'Worked on the sprint task and reporting to the team stand up',
+  'Worked on the remaining task from yesterday',
+  'Worked on optimizing and refactoring the code',
+  'Completing and be prepare for the upcomming sprint task',
+  'Adding some functionality to the current working module',
+];
+
 const vyagutaLeave = async (page) => {
   await page.goto('https://vyaguta.lftechnology.com/leave/wfh/apply');
   await delay(2000);
   await page.click('div.action-bar__btnarea button:first-child');
   await delay(4000);
-  await page.type(
-    'textarea[name=taskDone]',
-    'Worked on the sprint task as per JIRA'
-  );
+  await page.type('textarea[name=taskDone]', task.randomize());
   await delay(6000);
   // uncomment if we want the work from home submission
   // await page.click('button[type="submit"]');

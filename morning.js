@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   vyagutaLeave(page);
 
-  // await browserLaunch.close();
+  await browserLaunch.close();
 })();
 
 function delay(time) {
@@ -51,14 +51,23 @@ const enterPassword = async (page) => {
   await page.keyboard.press('Enter');
 };
 
+Array.prototype.randomize = function () {
+  return this[Math.floor(Math.random() * this.length)];
+};
+
+task = [
+  'Work on the sprint task and reporting to the team stand up',
+  'Work on the remaining task from yesterday',
+  'Work on optimizing and refactoring the code',
+  'Complete and be prepare for the upcomming sprint task',
+  'Add some functionality to the current working module',
+];
+
 const vyagutaLeave = async (page) => {
   await page.goto('https://vyaguta.lftechnology.com/leave/wfh/apply');
   await page.type('input[name=availability]', '9 to 6');
   await delay(2000);
-  await page.type(
-    'textarea[name=taskToDo]',
-    'To work on the sprint task as per JIRA'
-  );
+  await page.type('textarea[name=taskToDo]', task.randomize());
   await delay(2000);
   await page.click('label.morale-label');
   await delay(2000);
