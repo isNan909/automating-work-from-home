@@ -71,5 +71,5 @@ const vyagutaLeave = async (page) => {
   await page.type('textarea[name=taskDone]', task.randomize());
   await delay(6000);
   // uncomment if we want the work from home submission
-  // await page.click('button[type="submit"]');
+  await page.click('.action-bar-footer--bordered-top button[type=button]');
 };
