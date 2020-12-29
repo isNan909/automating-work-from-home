@@ -1,11 +1,16 @@
 const puppeteer = require('puppeteer');
+const cron = require('node-cron');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+cron.schedule('15 9 * * 1-5', () => {
+  console.log('I want to run this at 9:15am every monday, tuesday, wednesday, Thursday and Friday');
+});
+
 (async () => {
-  const browserLaunch = await puppeteer.launch({ headless: true });
+  const browserLaunch = await puppeteer.launch({ headless: false });
   const page = await browserLaunch.newPage();
   await page.goto('https://vyaguta.lftechnology.com/api/auth/login');
   await page.click('#loginButton');
@@ -19,8 +24,9 @@ if (process.env.NODE_ENV !== 'production') {
     vyagutaLeave(page);
   } catch {
     console.log('Work From Home cannot be applied !');
+    // Send a email to my inbox
   }
-  await browserLaunch.close();
+  //await browserLaunch.close();
 })();
 
 function delay(time) {
@@ -68,5 +74,5 @@ const vyagutaLeave = async (page) => {
   await page.type('textarea[name=taskDone]', task.randomize());
   await delay(6000);
   // Work from home submission
-  await page.click('.action-bar-footer--bordered-top button[type=button]');
+  //await page.click('.action-bar-footer--bordered-top button[type=button]');
 };
