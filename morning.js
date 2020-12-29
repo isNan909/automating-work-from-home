@@ -33,7 +33,8 @@ function delay(time) {
 const enterEmail = async (page) => {
   await page.waitForSelector('input');
   await page.type('input', process.env.VYAGUTA_EMAIL);
-  if (((i = 0), i < 3, i++)) {
+  let i = 0;
+  for (i = 0; i < 2; i++) {
     await page.keyboard.press('Tab');
   }
   await page.keyboard.press('Enter');
@@ -43,9 +44,11 @@ const enterPassword = async (page) => {
   await page.waitForSelector('input[type=password]');
   await page.type('input[type=password]', process.env.VYAGUTA_PASSWORD);
 
-  if (((i = 0), i < 3, i++)) {
+  let i = 0;
+  for (i = 0; i < 2; i++) {
     await page.keyboard.press('Tab');
   }
+
   await page.keyboard.press('Enter');
 };
 
