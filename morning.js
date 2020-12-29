@@ -5,25 +5,23 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 (async () => {
-  const browserLaunch = await puppeteer.launch({ headless: false });
+  const browserLaunch = await puppeteer.launch({ headless: true });
   const page = await browserLaunch.newPage();
   await page.goto('https://vyaguta.lftechnology.com/api/auth/login');
-  await page.screenshot({ path: 'screenshots/vyaguta-login.png' });
   await page.click('#loginButton');
-  await page.screenshot({ path: 'screenshots/addEmail-google.png' });
 
   enterEmail(page);
   await delay(4000);
   enterPassword(page);
 
-  await Promise.all([
-    page.waitForNavigation(),
-    page.screenshot({ path: 'screenshots/vyaguta.png' }),
-  ]);
+  await Promise.all([page.waitForNavigation()]);
 
-  vyagutaLeave(page);
-
-  //await browserLaunch.close();
+  try {
+    vyagutaLeave(page);
+  } catch {
+    console.log('Work From Home cannot be applied !');
+  }
+  await browserLaunch.close();
 })();
 
 function delay(time) {
@@ -71,6 +69,6 @@ const vyagutaLeave = async (page) => {
   await delay(2000);
   await page.click('label.morale-label');
   await delay(2000);
-  // uncomment if we you want the work from home submission
+  // Work from home submission
   await page.click('.action-bar-footer--bordered-top button[type="submit"]');
 };

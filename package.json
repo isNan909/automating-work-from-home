@@ -9,6 +9,7 @@
   "private": false,
   "dependencies": {
     "dotenv": "^8.2.0",
+    "node-cron": "^2.0.3",
     "puppeteer": "^5.5.0"
   }
 }
