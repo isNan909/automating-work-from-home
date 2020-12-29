@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   vyagutaLeave(page);
 
-  await browserLaunch.close();
+  //await browserLaunch.close();
 })();
 
 function delay(time) {
@@ -72,5 +72,5 @@ const vyagutaLeave = async (page) => {
   await page.click('label.morale-label');
   await delay(2000);
   // uncomment if we you want the work from home submission
-  // await page.click('button[type="submit"]');
+  await page.click('.action-bar-footer--bordered-top button[type="submit"]');
 };
