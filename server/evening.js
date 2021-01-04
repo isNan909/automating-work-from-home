@@ -12,9 +12,9 @@ cron.schedule('15 9 * * 1-5', () => {
 });
 
 (async () => {
-  const browserLaunch = await puppeteer.launch({ headless: false });
+  const browserLaunch = await puppeteer.launch({ headless: true });
   const page = await browserLaunch.newPage();
-  await page.goto('https://vyaguta.lftechnology.com/api/auth/login');
+  await page.goto(process.env.VYAGUTA_LOGIN_ROUTE);
   await page.click('#loginButton');
 
   enterEmail(page);
@@ -72,7 +72,7 @@ task = [
 ];
 
 const vyagutaLeave = async (page) => {
-  await page.goto('https://vyaguta.lftechnology.com/leave/wfh/apply');
+  await page.goto(process.env.VYAGUTA_WFH_APPLY_ROUTE);
   await delay(2000);
   await page.click('div.action-bar__btnarea button:first-child');
   await delay(4000);
